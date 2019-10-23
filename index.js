@@ -1,4 +1,4 @@
-let imgs;
+let imgs, photoID;
 let gallery = document.getElementById('gallery');
 
 fetch(
@@ -22,17 +22,42 @@ fetch(
 		});
 	})
 	.catch(function(err) {
-		console.log('Error retrieving photos :( Flickr may be experiencing issues.', err);
+		console.log('Error retrieving photos :(', err);
 	});
 
 // Assigns onclick event to individual images using their id after fetch builds list
 // Will use later to gather EXIF data and hopefully display full-size image
-setInterval(() => {
-	imgs = document.querySelectorAll('img');
-	for (let i = 0; i < imgs.length; i++) {
-		let img = imgs[i];
-		img.onclick = function() {
-			console.log(this.id);
-		};
-	}
-}, 2000);
+let setImgIDs = () => {
+	setInterval(() => {
+		imgs = document.querySelectorAll('img');
+		for (let i = 0; i < imgs.length; i++) {
+			let img = imgs[i];
+			img.onclick = function() {
+				photoID = this.id;
+				console.log(photoID);
+				getExif();
+			};
+		}
+	}, 2000);
+};
+
+setImgIDs();
+
+// Works but needs to set variable(s) for exif data not just console.log
+function getExif() {
+	fetch(
+		`https://www.flickr.com/services/rest/?method=flickr.photos.getExif&api_key=fa85dd29b93573b004328880fb639803&photo_id=${photoID}&format=json&nojsoncallback=1`
+	)
+		.then(function(response) {
+			if (response.status !== 200) {
+				console.log('Looks like there was a problem. Status Code: ' + response.status);
+				return;
+			}
+			response.json().then(function(data) {
+				console.log(data.photo.camera);
+			});
+		})
+		.catch(function(err) {
+			console.log('Error retrieving photos :(', err);
+		});
+}
