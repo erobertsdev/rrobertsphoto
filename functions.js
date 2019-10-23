@@ -1,6 +1,6 @@
 function renderGallery() {
 	fetch(
-		'https://www.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=4dbd96ac5faaa6d7c4745f718f6e0b9d&user_id=46881493%40N04&extras=url_m&format=json&nojsoncallback=1'
+		'https://www.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=4dbd96ac5faaa6d7c4745f718f6e0b9d&user_id=46881493%40N04&extras=url_m&per_page=20&page=1&format=json&nojsoncallback=1'
 	)
 		.then(function(response) {
 			if (response.status !== 200) {
@@ -14,7 +14,7 @@ function renderGallery() {
 				for (let i = 0; i < data.photos.perpage; i++) {
 					let photoID = data.photos.photo[i].id;
 					let photoURL = data.photos.photo[i].url_m;
-					galleryList += `<img id="${photoID}" src="${photoURL}">`;
+					galleryList += `<div class="img-container"><img id="${photoID}" src="${photoURL}" class="image"><div class="info"><div class="info-text">EXIF</div></div></div>`;
 				}
 				gallery.innerHTML = `${galleryList}`;
 			});
@@ -33,7 +33,6 @@ function setImgIDs() {
 			let img = imgs[i];
 			img.onclick = function() {
 				photoID = this.id;
-				console.log(photoID);
 				getExif();
 			};
 		}
@@ -48,20 +47,15 @@ function getExif() {
 		.then(function(response) {
 			response.json().then(function(data) {
 				exifCamera = data.photo.camera;
-				console.log(exifCamera);
 				for (let i = 0; i < data.photo.exif.length; i++) {
 					if (data.photo.exif[i].tag === 'ExposureTime') {
 						exifExposure = data.photo.exif[i].raw._content;
-						console.log(exifExposure);
 					} else if (data.photo.exif[i].label === 'Aperture') {
 						exifAperture = data.photo.exif[i].clean._content;
-						console.log(exifAperture);
 					} else if (data.photo.exif[i].tag === 'ISO') {
 						exifISO = data.photo.exif[i].raw._content;
-						console.log(exifISO);
 					} else if (data.photo.exif[i].tag === 'FocalLength') {
 						exifFocalLength = data.photo.exif[i].raw._content;
-						console.log(exifFocalLength);
 					}
 				}
 			});

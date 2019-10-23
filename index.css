@@ -8,6 +8,14 @@ h1 {
 	color: #b39573;
 }
 
-img {
-	padding: 20px;
+.image {
+	margin: 20px;
+}
+
+#main {
+	display: flex;
+}
+
+.img-container {
+	background-color: red;
 }
