@@ -1,33 +1,38 @@
 let imgs, photoID, exifCamera, exifExposure, exifAperture, exifISO, exifFocalLength;
 let gallery = document.getElementById('gallery');
 
-fetch(
-	'https://www.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=4dbd96ac5faaa6d7c4745f718f6e0b9d&user_id=46881493%40N04&extras=url_m&format=json&nojsoncallback=1'
-)
-	.then(function(response) {
-		if (response.status !== 200) {
-			console.log('Looks like there was a problem. Status Code: ' + response.status);
-			return;
-		}
+renderGallery();
+setImgIDs();
 
-		// Render photos to gallery div and assign IDs to use later for full-size and EXIF data
-		response.json().then(function(data) {
-			let galleryList = '';
-			for (let i = 0; i < data.photos.perpage; i++) {
-				let photoID = data.photos.photo[i].id;
-				let photoURL = data.photos.photo[i].url_m;
-				galleryList += `<img id="${photoID}" src="${photoURL}">`;
+function renderGallery() {
+	fetch(
+		'https://www.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=4dbd96ac5faaa6d7c4745f718f6e0b9d&user_id=46881493%40N04&extras=url_m&format=json&nojsoncallback=1'
+	)
+		.then(function(response) {
+			if (response.status !== 200) {
+				console.log('Looks like there was a problem. Status Code: ' + response.status);
+				return;
 			}
-			gallery.innerHTML = `${galleryList}`;
+
+			// Render photos to gallery div and assign IDs to use later for full-size and EXIF data
+			response.json().then(function(data) {
+				let galleryList = '';
+				for (let i = 0; i < data.photos.perpage; i++) {
+					let photoID = data.photos.photo[i].id;
+					let photoURL = data.photos.photo[i].url_m;
+					galleryList += `<img id="${photoID}" src="${photoURL}">`;
+				}
+				gallery.innerHTML = `${galleryList}`;
+			});
+		})
+		.catch(function(err) {
+			console.log('Error retrieving photos :(', err);
 		});
-	})
-	.catch(function(err) {
-		console.log('Error retrieving photos :(', err);
-	});
+}
 
 // Assigns onclick event to individual images using their id after fetch builds list
 // Will use later to gather EXIF data and hopefully display full-size image
-let setImgIDs = () => {
+function setImgIDs() {
 	setInterval(() => {
 		imgs = document.querySelectorAll('img');
 		for (let i = 0; i < imgs.length; i++) {
@@ -39,9 +44,7 @@ let setImgIDs = () => {
 			};
 		}
 	}, 2000);
-};
-
-setImgIDs();
+}
 
 // Gathers EXIF data when photo is clicked
 function getExif() {
@@ -49,10 +52,6 @@ function getExif() {
 		`https://www.flickr.com/services/rest/?method=flickr.photos.getExif&api_key=fa85dd29b93573b004328880fb639803&photo_id=${photoID}&format=json&nojsoncallback=1`
 	)
 		.then(function(response) {
-			if (response.status !== 200) {
-				console.log('Looks like there was a problem. Status Code: ' + response.status);
-				return;
-			}
 			response.json().then(function(data) {
 				exifCamera = data.photo.camera;
 				console.log(exifCamera);
@@ -74,6 +73,6 @@ function getExif() {
 			});
 		})
 		.catch(function(err) {
-			console.log('Error retrieving photos :(', err);
+			console.log('Error retrieving data.', err);
 		});
 }
