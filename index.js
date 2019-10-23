@@ -43,7 +43,7 @@ let setImgIDs = () => {
 
 setImgIDs();
 
-// Works but needs to set variable(s) for exif data not just console.log
+// Gathers EXIF data when photo is clicked
 function getExif() {
 	fetch(
 		`https://www.flickr.com/services/rest/?method=flickr.photos.getExif&api_key=fa85dd29b93573b004328880fb639803&photo_id=${photoID}&format=json&nojsoncallback=1`
@@ -56,14 +56,21 @@ function getExif() {
 			response.json().then(function(data) {
 				exifCamera = data.photo.camera;
 				console.log(exifCamera);
-				exifExposure = data.photo.exif[10].raw._content;
-				console.log(exifExposure);
-				exifAperture = data.photo.exif[11].clean._content;
-				console.log(exifAperture);
-				exifISO = data.photo.exif[13].raw._content;
-				console.log(exifISO);
-				exifFocalLength = data.photo.exif[22].raw._content;
-				console.log(exifFocalLength);
+				for (let i = 0; i < data.photo.exif.length; i++) {
+					if (data.photo.exif[i].tag === 'ExposureTime') {
+						exifExposure = data.photo.exif[i].raw._content;
+						console.log(exifExposure);
+					} else if (data.photo.exif[i].label === 'Aperture') {
+						exifAperture = data.photo.exif[i].clean._content;
+						console.log(exifAperture);
+					} else if (data.photo.exif[i].tag === 'ISO') {
+						exifISO = data.photo.exif[i].raw._content;
+						console.log(exifISO);
+					} else if (data.photo.exif[i].tag === 'FocalLength') {
+						exifFocalLength = data.photo.exif[i].raw._content;
+						console.log(exifFocalLength);
+					}
+				}
 			});
 		})
 		.catch(function(err) {
