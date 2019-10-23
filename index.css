@@ -17,5 +17,30 @@ h1 {
 }
 
 .img-container {
-	background-color: red;
+	float: left;
+	background-color: #4f4038;
 }
+
+.title {
+	padding: 10px;
+	opacity: 0;
+}
+
+.exif {
+	padding: 10px;
+	opacity: 0;
+}
+
+.img-container:hover .title {
+	opacity: 1;
+	transition: opacity 1s ease-in;
+}
+
+.img-container:hover .exif {
+	opacity: 1;
+	transition: opacity 1s ease-in;
+}
+
+/* .img-container:hover .exif {
+	opacity: 1;
+} */

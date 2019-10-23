@@ -14,9 +14,14 @@ function renderGallery() {
 				for (let i = 0; i < data.photos.perpage; i++) {
 					let photoID = data.photos.photo[i].id;
 					let photoURL = data.photos.photo[i].url_m;
-					galleryList += `<div class="img-container"><img id="${photoID}" src="${photoURL}" class="image"><div class="info"><div class="info-text">EXIF</div></div></div>`;
+					photoTitle = data.photos.photo[i].title;
+					galleryList += `<div class="img-container"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image"><div class="exif">EXIF</div></div>`;
 				}
 				gallery.innerHTML = `${galleryList}`;
+				exif = document.querySelectorAll('.exif');
+				imgs = document.querySelectorAll('img');
+				click(exif);
+				click(imgs);
 			});
 		})
 		.catch(function(err) {
@@ -63,4 +68,13 @@ function getExif() {
 		.catch(function(err) {
 			console.log('Error retrieving data.', err);
 		});
+	console.log(``);
+}
+
+function click(node) {
+	for (let i = 0; i < node.length; i++) {
+		node[i].addEventListener('click', function(e) {
+			console.log(`${e} was clicked`);
+		});
+	}
 }
