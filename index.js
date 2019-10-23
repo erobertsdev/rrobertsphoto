@@ -1,4 +1,4 @@
-let imgs, photoID;
+let imgs, photoID, exifCamera, exifExposure, exifAperture, exifISO, exifFocalLength;
 let gallery = document.getElementById('gallery');
 
 fetch(
@@ -54,7 +54,16 @@ function getExif() {
 				return;
 			}
 			response.json().then(function(data) {
-				console.log(data.photo.camera);
+				exifCamera = data.photo.camera;
+				console.log(exifCamera);
+				exifExposure = data.photo.exif[10].raw._content;
+				console.log(exifExposure);
+				exifAperture = data.photo.exif[11].clean._content;
+				console.log(exifAperture);
+				exifISO = data.photo.exif[13].raw._content;
+				console.log(exifISO);
+				exifFocalLength = data.photo.exif[22].raw._content;
+				console.log(exifFocalLength);
 			});
 		})
 		.catch(function(err) {
