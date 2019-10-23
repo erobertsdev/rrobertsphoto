@@ -8,16 +8,15 @@ h1 {
 	color: #b39573;
 }
 
-.image {
+/* .image {
 	margin: 20px;
-}
+} */
 
 #main {
 	display: flex;
 }
 
 .img-container {
-	float: left;
 	background-color: #4f4038;
 }
 

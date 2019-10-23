@@ -15,13 +15,13 @@ function renderGallery() {
 					let photoID = data.photos.photo[i].id;
 					let photoURL = data.photos.photo[i].url_m;
 					photoTitle = data.photos.photo[i].title;
-					galleryList += `<div class="img-container"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image"><div class="exif">EXIF</div></div>`;
+					galleryList += `<div class="img-container" onclick="fullSize()"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image"><div class="exif">EXIF</div></div>`;
 				}
 				gallery.innerHTML = `${galleryList}`;
 				exif = document.querySelectorAll('.exif');
 				imgs = document.querySelectorAll('img');
-				click(exif);
-				click(imgs);
+				// click(exif);
+				// click(imgs);
 			});
 		})
 		.catch(function(err) {
@@ -68,13 +68,33 @@ function getExif() {
 		.catch(function(err) {
 			console.log('Error retrieving data.', err);
 		});
-	console.log(``);
 }
 
-function click(node) {
-	for (let i = 0; i < node.length; i++) {
-		node[i].addEventListener('click', function(e) {
-			console.log(`${e} was clicked`);
+// function click(node) {
+// 	if (node === exif) {
+// 		for (let i = 0; i < node.length; i++) {
+// 			node[i].addEventListener('click', function(e) {});
+// 		}
+// 	}
+// }
+
+function fullSize() {
+	fetch(
+		`https://www.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=fa85dd29b93573b004328880fb639803&photo_id=${photoID}&format=json&nojsoncallback=1`
+	)
+		.then(function(response) {
+			response.json().then(function(data) {
+				for (let i = 0; i < data.sizes.size.length; i++) {
+					if (data.sizes.size[i].label === 'Original') {
+						largeImg = data.sizes.size[i].source;
+					}
+				}
+				window.location.href = `${largeImg}`;
+			});
+		})
+		.catch(function(err) {
+			console.log('Error retrieving data.', err);
 		});
-	}
 }
+
+// https://www.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=fa85dd29b93573b004328880fb639803&photo_id=${photoID}&format=json&nojsoncallback=1
