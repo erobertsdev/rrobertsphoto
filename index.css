@@ -32,9 +32,9 @@ body {
 	border-radius: 5px;
 }
 
-/* .img-container {
-	margin: 40px;
-} */
+.img-container {
+	animation: fadeIn 1s ease-in;
+}
 
 .title {
 	font-size: 2rem;
@@ -67,6 +67,12 @@ body {
 	padding: 20px;
 	margin: 20px;
 	border: 1px solid #fff;
+	transition: all .3s;
+}
+
+.btn:hover {
+	cursor: pointer;
+	background-color: #7c7c7c;
 }
 
 .btn-next {
@@ -75,4 +81,13 @@ body {
 
 .btn-previous {
 	float: left;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }

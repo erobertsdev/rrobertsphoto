@@ -19,6 +19,7 @@ function renderGallery(page, perPage) {
 					galleryList += `<div class="img-container" onclick="fullSize()"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image"><div class="exif">EXIF</div></div>`;
 				}
 				gallery.innerHTML = `${galleryList}`;
+				displayPageNumber.innerHTML = `Page: ${pageNum}`;
 				exif = document.querySelectorAll('.exif');
 				imgs = document.querySelectorAll('img');
 				// click(exif);
