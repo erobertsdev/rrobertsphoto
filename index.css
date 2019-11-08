@@ -1,17 +1,26 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 62.5%;
+}
+
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	background-color: #141111;
 	color: #eef2f3;
 }
 
-h1 {
+.main-title {
+	font-size: 5rem;
 	color: #b39573;
 }
 
 #gallery {
 	display: grid;
 	max-width: 1900px;
-	margin: 0 auto;
 	grid-template-columns: repeat(auto-fill, minmax(300px, 450px));
 	grid-gap: 40px;
 	grid-auto-rows: minmax(250px, auto);
@@ -19,8 +28,11 @@ h1 {
 }
 
 .image {
-	margin: 40px;
 	border-radius: 5px;
+}
+
+.img-container {
+	margin: 40px;
 }
 
 .title {

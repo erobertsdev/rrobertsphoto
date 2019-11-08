@@ -98,4 +98,20 @@ function fullSize() {
 		});
 }
 
+function next() {
+	nextButton.addEventListener('click', function() {
+		pageNum++;
+		renderGallery(pageNum, perPage);
+	});
+}
+
+function previous() {
+	prevButton.addEventListener('click', function() {
+		if (pageNum >= 1) {
+			pageNum--;
+			renderGallery(pageNum, perPage);
+		}
+	});
+}
+
 // https://www.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=fa85dd29b93573b004328880fb639803&photo_id=${photoID}&format=json&nojsoncallback=1
