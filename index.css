@@ -29,6 +29,8 @@ body {
 }
 
 .image {
+	max-width: 450px;
+	min-width: 200px;
 	border-radius: 5px;
 }
 
@@ -68,19 +70,26 @@ body {
 	margin: 20px;
 	border: 1px solid #fff;
 	transition: all .3s;
+	opacity: .2;
 }
 
 .btn:hover {
 	cursor: pointer;
 	background-color: #7c7c7c;
+	opacity: 1;
 }
 
 .btn-next {
-	float: right;
+	position: fixed;
+	right: 1rem;
+	bottom: 2rem;
+	/* float: right; */
 }
 
 .btn-previous {
-	float: left;
+	position: fixed;
+	left: 1rem;
+	bottom: 2rem;
 }
 
 @keyframes fadeIn {
