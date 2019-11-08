@@ -16,7 +16,7 @@ function renderGallery(page, perPage) {
 					let photoURL = data.photos.photo[i].url_m;
 					photoTitle = data.photos.photo[i].title;
 					// Change to background-image rather than <img> <img id="${photoID}" src="${photoURL}" class="image">
-					galleryList += `<div class="img-container"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image" onclick="fullSize()"><div class="exif">EXIF</div></div>`;
+					galleryList += `<div class="img-container" onclick="fullSize()"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image"><div class="exif">EXIF</div></div>`;
 				}
 				gallery.innerHTML = `${galleryList}`;
 				exif = document.querySelectorAll('.exif');
@@ -102,6 +102,7 @@ function next() {
 	nextButton.addEventListener('click', function() {
 		pageNum++;
 		renderGallery(pageNum, perPage);
+		window.scrollTo(0, 0);
 	});
 }
 
@@ -110,6 +111,7 @@ function previous() {
 		if (pageNum >= 1) {
 			pageNum--;
 			renderGallery(pageNum, perPage);
+			window.scrollTo(0, 0);
 		}
 	});
 }
