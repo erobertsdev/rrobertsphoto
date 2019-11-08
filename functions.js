@@ -1,6 +1,6 @@
-function renderGallery() {
+function renderGallery(page, perPage) {
 	fetch(
-		'https://www.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=4dbd96ac5faaa6d7c4745f718f6e0b9d&user_id=46881493%40N04&extras=url_m&per_page=20&page=1&format=json&nojsoncallback=1'
+		`https://www.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=4dbd96ac5faaa6d7c4745f718f6e0b9d&user_id=46881493%40N04&extras=url_m&per_page=${perPage}&page=${page}&format=json&nojsoncallback=1`
 	)
 		.then(function(response) {
 			if (response.status !== 200) {
@@ -15,8 +15,8 @@ function renderGallery() {
 					let photoID = data.photos.photo[i].id;
 					let photoURL = data.photos.photo[i].url_m;
 					photoTitle = data.photos.photo[i].title;
-					// Change to background-image rather than <img>
-					galleryList += `<div class="img-container" onclick="fullSize()"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image"><div class="exif">EXIF</div></div>`;
+					// Change to background-image rather than <img> <img id="${photoID}" src="${photoURL}" class="image">
+					galleryList += `<div class="img-container"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image" onclick="fullSize()"><div class="exif">EXIF</div></div>`;
 				}
 				gallery.innerHTML = `${galleryList}`;
 				exif = document.querySelectorAll('.exif');

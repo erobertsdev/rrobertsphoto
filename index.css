@@ -8,16 +8,19 @@ h1 {
 	color: #b39573;
 }
 
-/* .image {
-	margin: 20px;
-} */
-
-#main {
-	display: flex;
+#gallery {
+	display: grid;
+	max-width: 1900px;
+	margin: 0 auto;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 450px));
+	grid-gap: 40px;
+	grid-auto-rows: minmax(250px, auto);
+	justify-content: center;
 }
 
-.img-container {
-	background-color: #4f4038;
+.image {
+	margin: 40px;
+	border-radius: 5px;
 }
 
 .title {
@@ -39,7 +42,3 @@ h1 {
 	opacity: 1;
 	transition: opacity 1s ease-in;
 }
-
-/* .img-container:hover .exif {
-	opacity: 1;
-} */
