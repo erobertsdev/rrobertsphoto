@@ -19,6 +19,10 @@ body {
 	color: #b39573;
 }
 
+.page-number {
+	font-size: 1.5rem;
+}
+
 #gallery {
 	display: grid;
 	max-width: 1900px;
@@ -26,12 +30,19 @@ body {
 	grid-gap: 40px;
 	grid-auto-rows: minmax(250px, auto);
 	justify-content: center;
+	align-items: center;
 }
 
 .image {
+	border: 1px solid rgba(255, 255, 255, 0.527);
 	max-width: 450px;
 	min-width: 200px;
 	border-radius: 5px;
+	transition: all .5s;
+}
+
+.image:active {
+	transform: scale(1.5);
 }
 
 .img-container {
@@ -62,6 +73,7 @@ body {
 }
 
 .full-size {
+	margin-left: 5px;
 	width: 5rem;
 }
 
@@ -86,6 +98,7 @@ body {
 	border-radius: 1.5rem;
 	background-color: #4b4b4b;
 	font-size: 2rem;
+	font-weight: 100;
 	padding: 20px;
 	margin: 20px;
 	border: 1px solid #fff;
@@ -103,7 +116,6 @@ body {
 	position: fixed;
 	right: 1rem;
 	bottom: 2rem;
-	/* float: right; */
 }
 
 .btn-previous {
