@@ -15,7 +15,6 @@ function renderGallery(page, perPage) {
 					let photoID = data.photos.photo[i].id;
 					let photoURL = data.photos.photo[i].url_m;
 					photoTitle = data.photos.photo[i].title;
-					// Change to background-image rather than <img> <img id="${photoID}" src="${photoURL}" class="image">
 					galleryList += `<div class="img-container"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image"><div class="sub-button exif">EXIF</div><div class="sub-button full-size" onclick="fullSize()">FULLSIZE</div></div>`;
 				}
 				gallery.innerHTML = `${galleryList}`;

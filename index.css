@@ -9,18 +9,19 @@ html {
 
 body {
 	background-color: #2f2f2f;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Lato', sans-serif;
 	color: #eef2f3;
 }
 
 nav {
+	color: #eef2f3;
 	padding: 20px;
-	background-color: gray;
+	background-color: #141111;
 }
 
 .main-title {
 	font-size: 5rem;
-	color: #b39573;
+	color: #4f4038;
 }
 
 .page-number {
@@ -54,10 +55,6 @@ nav {
 	transition: all .5s;
 }
 
-.image:active {
-	transform: scale(1.5);
-}
-
 .img-container {
 	animation: fadeIn 1s ease-in;
 }
@@ -73,31 +70,33 @@ nav {
 .sub-button {
 	display: inline;
 	text-align: center;
-	border-radius: 1.5rem;
-	border: 1px solid #fff;
-	background-color: #4b4b4b;
+	background-color: #4b4b4bc0;
 	font-size: 2rem;
 	padding: 10px;
 	opacity: 0;
+	transition: all .2s;
 }
 
 .exif {
+	border-bottom-left-radius: 1.5rem;
 	width: 4.5rem;
 }
 
 .full-size {
+	border-bottom-right-radius: 1.5rem;
 	margin-left: 5px;
 	width: 5rem;
 }
 
 .sub-button:hover {
 	cursor: pointer;
+	background-color: #4b4b4b;
 }
 
 .img-container:hover .title {
 	opacity: 1;
 	transition: opacity 1s ease-in;
-	background-color: #7c7c7c83;
+	background-color: #4b4b4bc0;
 }
 
 .img-container:hover .sub-button {
@@ -114,7 +113,7 @@ nav {
 	padding: 15px;
 	margin: 20px;
 	/* border: 1px solid #fff; */
-	transition: all .3s;
+	transition: all .2s;
 	opacity: .2;
 }
 
