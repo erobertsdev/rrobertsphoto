@@ -17,8 +17,11 @@ function renderGallery(page, perPage) {
 					photoTitle = data.photos.photo[i].title;
 					galleryList += `<div class="img-container"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image"><div class="sub-button exif" onclick="displayExif()">EXIF</div><div class="sub-button full-size" onclick="fullSize()">FULLSIZE</div></div>`;
 				}
+				for (let i = 1; i <= data.photos.pages; i++) {
+					pageSelect.options[pageSelect.options.length] = new Option(i, i);
+				}
 				gallery.innerHTML = `${galleryList}`;
-				displayPageNumber.innerHTML = `Page: ${pageNum}`;
+				// displayPageNumber.innerHTML = `Page: ${pageNum}`;
 				exif = document.querySelectorAll('.exif');
 				imgs = document.querySelectorAll('img');
 			});
@@ -102,6 +105,13 @@ function fullSize() {
 		.catch(function(err) {
 			console.log('Error retrieving data.', err);
 		});
+}
+
+function pageSet() {
+	pageSelect.addEventListener('change', function(e) {
+		pageNum = e.target.value;
+		renderGallery(pageNum, perPage);
+	});
 }
 
 function next() {
