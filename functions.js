@@ -17,8 +17,11 @@ function renderGallery(page, perPage) {
 					photoTitle = data.photos.photo[i].title;
 					galleryList += `<div class="img-container"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image"><div class="sub-button exif" onclick="displayExif()">EXIF</div><div class="sub-button full-size" onclick="fullSize()">FULLSIZE</div></div>`;
 				}
-				for (let i = 1; i <= data.photos.pages; i++) {
-					pageSelect.options[pageSelect.options.length] = new Option(i, i);
+				if (!listDone) {
+					for (let i = 1; i < data.photos.pages; i++) {
+						pageSelect.options[pageSelect.options.length] = new Option(i, i);
+					}
+					listDone = true;
 				}
 				gallery.innerHTML = `${galleryList}`;
 				// displayPageNumber.innerHTML = `Page: ${pageNum}`;
@@ -73,11 +76,11 @@ function getExif() {
 }
 
 function displayExif() {
-	console.log(exifCamera);
-	console.log(exifExposure);
-	console.log(exifAperture);
-	console.log(exifISO);
-	console.log(exifFocalLength);
+	console.log(`Camera: ${exifCamera}`);
+	console.log(`Exposure Time: ${exifExposure}`);
+	console.log(`Aperture: ${exifAperture}`);
+	console.log(`ISO: ${exifISO}`);
+	console.log(`Focal Length: ${exifFocalLength}`);
 }
 
 // function click(node) {
@@ -119,15 +122,17 @@ function next() {
 		pageNum++;
 		renderGallery(pageNum, perPage);
 		window.scrollTo(0, 0);
+		pageSelect.selectedIndex = pageNum - 1;
 	});
 }
 
 function previous() {
 	prevButton.addEventListener('click', function() {
-		if (pageNum >= 1) {
+		if (pageNum > 1) {
 			pageNum--;
 			renderGallery(pageNum, perPage);
 			window.scrollTo(0, 0);
+			pageSelect.selectedIndex = pageNum - 1;
 		}
 	});
 }

@@ -24,15 +24,27 @@ nav {
 	color: #4f4038;
 }
 
-.page-number {
+label {
 	float: left;
-	font-size: 1.5rem;
+	font-size: 2rem;
+}
+
+select {
+	font-size: 2rem;
+	color: #eef2f3;
+	background-color: #141111;
+	margin-left: 10px;
+	border: 0px;
+}
+
+select:focus {
+	outline: none;
 }
 
 .info-icon {
 	float: right;
 	font-size: 3.5rem;
-	transform: translateY(-50px);
+	transform: translateY(-45px);
 	padding-right: 10px;
 }
 
@@ -41,7 +53,7 @@ nav {
 	display: grid;
 	max-width: 1900px;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 450px));
-	grid-gap: 40px;
+	grid-gap: 20px;
 	grid-auto-rows: minmax(250px, auto);
 	justify-content: center;
 	align-items: center;
