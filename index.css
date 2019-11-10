@@ -8,10 +8,14 @@ html {
 }
 
 body {
-	margin: 20px;
 	background-color: #2f2f2f;
 	font-family: Arial, Helvetica, sans-serif;
 	color: #eef2f3;
+}
+
+nav {
+	padding: 20px;
+	background-color: gray;
 }
 
 .main-title {
@@ -20,10 +24,19 @@ body {
 }
 
 .page-number {
+	float: left;
 	font-size: 1.5rem;
 }
 
+.info-icon {
+	float: right;
+	font-size: 3.5rem;
+	transform: translateY(-50px);
+	padding-right: 10px;
+}
+
 #gallery {
+	margin: 10px;
 	display: grid;
 	max-width: 1900px;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 450px));
@@ -122,6 +135,11 @@ body {
 	position: fixed;
 	left: 1rem;
 	bottom: 2rem;
+}
+
+footer {
+	height: 100px;
+	background-color: grey;
 }
 
 @keyframes fadeIn {
