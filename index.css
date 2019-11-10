@@ -111,9 +111,9 @@ nav {
 	background-color: #4b4b4b;
 	font-size: 3rem;
 	font-weight: 100;
-	padding: 20px;
+	padding: 15px;
 	margin: 20px;
-	border: 1px solid #fff;
+	/* border: 1px solid #fff; */
 	transition: all .3s;
 	opacity: .2;
 }
@@ -121,11 +121,13 @@ nav {
 .btn:hover {
 	cursor: pointer;
 	background-color: #7c7c7c;
+	transform: scale(1.1);
 	opacity: 1;
 }
 
 .btn-next {
 	border-top-left-radius: 1.5rem;
+	border-bottom-left-radius: 1.5rem;
 	position: fixed;
 	right: -2rem;
 	top: 50vh;
@@ -133,6 +135,7 @@ nav {
 
 .btn-previous {
 	border-top-right-radius: 1.5rem;
+	border-bottom-right-radius: 1.5rem;
 	position: fixed;
 	left: -2rem;
 	top: 50vh;
