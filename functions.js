@@ -15,14 +15,12 @@ function renderGallery(page, perPage) {
 					let photoID = data.photos.photo[i].id;
 					let photoURL = data.photos.photo[i].url_m;
 					photoTitle = data.photos.photo[i].title;
-					galleryList += `<div class="img-container"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image"><div class="sub-button exif">EXIF</div><div class="sub-button full-size" onclick="fullSize()">FULLSIZE</div></div>`;
+					galleryList += `<div class="img-container"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image"><div class="sub-button exif" onclick="displayExif()">EXIF</div><div class="sub-button full-size" onclick="fullSize()">FULLSIZE</div></div>`;
 				}
 				gallery.innerHTML = `${galleryList}`;
 				displayPageNumber.innerHTML = `Page: ${pageNum}`;
 				exif = document.querySelectorAll('.exif');
 				imgs = document.querySelectorAll('img');
-				// click(exif);
-				// click(imgs);
 			});
 		})
 		.catch(function(err) {
@@ -37,7 +35,7 @@ function setImgIDs() {
 		imgs = document.querySelectorAll('img');
 		for (let i = 0; i < imgs.length; i++) {
 			let img = imgs[i];
-			img.onclick = function() {
+			img.onmouseover = function() {
 				photoID = this.id;
 				getExif();
 			};
@@ -69,6 +67,14 @@ function getExif() {
 		.catch(function(err) {
 			console.log('Error retrieving data.', err);
 		});
+}
+
+function displayExif() {
+	console.log(exifCamera);
+	console.log(exifExposure);
+	console.log(exifAperture);
+	console.log(exifISO);
+	console.log(exifFocalLength);
 }
 
 // function click(node) {
