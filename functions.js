@@ -24,7 +24,6 @@ function renderGallery(page, perPage) {
 					listDone = true;
 				}
 				gallery.innerHTML = `${galleryList}`;
-				// displayPageNumber.innerHTML = `Page: ${pageNum}`;
 				exif = document.querySelectorAll('.exif');
 				imgs = document.querySelectorAll('img');
 			});
@@ -34,8 +33,7 @@ function renderGallery(page, perPage) {
 		});
 }
 
-// Assigns onclick event to individual images using their id after fetch builds list
-// Will use later to gather EXIF data and hopefully display full-size image
+// Gathers EXIF data and photoID for EXIF and FULLSIZE buttons when picture is mousedover
 function setImgIDs() {
 	setInterval(() => {
 		imgs = document.querySelectorAll('img');
@@ -82,14 +80,6 @@ function displayExif() {
 	console.log(`ISO: ${exifISO}`);
 	console.log(`Focal Length: ${exifFocalLength}`);
 }
-
-// function click(node) {
-// 	if (node === exif) {
-// 		for (let i = 0; i < node.length; i++) {
-// 			node[i].addEventListener('click', function(e) {});
-// 		}
-// 	}
-// }
 
 function fullSize() {
 	fetch(
