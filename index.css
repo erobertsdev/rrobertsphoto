@@ -107,10 +107,9 @@ nav {
 
 .btn {
 	text-align: center;
-	width: 10rem;
-	border-radius: 1.5rem;
+	width: 2rem;
 	background-color: #4b4b4b;
-	font-size: 2rem;
+	font-size: 3rem;
 	font-weight: 100;
 	padding: 20px;
 	margin: 20px;
@@ -126,15 +125,17 @@ nav {
 }
 
 .btn-next {
+	border-top-left-radius: 1.5rem;
 	position: fixed;
-	right: 1rem;
-	bottom: 2rem;
+	right: -2rem;
+	top: 50vh;
 }
 
 .btn-previous {
+	border-top-right-radius: 1.5rem;
 	position: fixed;
-	left: 1rem;
-	bottom: 2rem;
+	left: -2rem;
+	top: 50vh;
 }
 
 footer {
