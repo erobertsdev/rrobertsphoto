@@ -74,6 +74,9 @@ function getExif() {
 }
 
 function displayExif() {
+	console.log(this);
+	// exif.innerHTML = `<p>Camera: ${exifCamera}</p>
+	// 					<p>Exposure Time: ${exifExposure}</p>`;
 	console.log(`Camera: ${exifCamera}`);
 	console.log(`Exposure Time: ${exifExposure}`);
 	console.log(`Aperture: ${exifAperture}`);
