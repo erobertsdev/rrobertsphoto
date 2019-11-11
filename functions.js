@@ -74,14 +74,12 @@ function getExif() {
 }
 
 function displayExif() {
-	console.log(this);
-	// exif.innerHTML = `<p>Camera: ${exifCamera}</p>
-	// 					<p>Exposure Time: ${exifExposure}</p>`;
-	console.log(`Camera: ${exifCamera}`);
-	console.log(`Exposure Time: ${exifExposure}`);
-	console.log(`Aperture: ${exifAperture}`);
-	console.log(`ISO: ${exifISO}`);
-	console.log(`Focal Length: ${exifFocalLength}`);
+	let exifPopup = document.querySelector(`.exif${photoID}`);
+	exifPopup.innerHTML = `<p>Camera: ${exifCamera}</p>
+						<p>Exposure Time: ${exifExposure}</p>
+						<p>Aperture: ${exifAperture}</p>
+						<p>ISO: ${exifISO}</p>
+						<p>Focal Length: ${exifFocalLength}</p>`;
 }
 
 function fullSize() {

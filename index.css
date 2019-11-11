@@ -14,9 +14,11 @@ body {
 }
 
 nav {
+	width: 100%;
 	color: #eef2f3;
 	padding: 20px;
 	background-color: #141111;
+	filter: drop-shadow(0px 2px 5px #141111);
 }
 
 .main-title {
@@ -46,7 +48,7 @@ select:focus {
 	float: right;
 	font-size: 3.5rem;
 	transform: translateY(-45px);
-	padding-right: 10px;
+	margin-right: 50px;
 }
 
 #gallery {
@@ -126,7 +128,6 @@ select:focus {
 	font-weight: 100;
 	padding: 15px;
 	margin: 20px;
-	/* border: 1px solid #fff; */
 	transition: all .2s;
 	opacity: .2;
 }
