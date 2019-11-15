@@ -96,13 +96,13 @@ select:focus {
 	opacity: 1;
 	transition: opacity 1s ease-in;
 	background-color: #4b4b4b80;
-	transform: translateY(47px);
+	transform: translateY(41px);
 }
 
 .img-container:hover .sub-button {
 	opacity: 1;
 	transition: opacity 1s ease-in;
-	transform: translateY(-46px);
+	transform: translateY(-41px);
 }
 
 .title {
@@ -110,8 +110,9 @@ select:focus {
 	max-width: 300px;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	border-top-left-radius: .5rem;
 	border-bottom-right-radius: 1.5rem;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	padding: 10px;
 	opacity: 0;
 	white-space: nowrap;
@@ -121,10 +122,14 @@ select:focus {
 	display: inline-block;
 	text-align: center;
 	background-color: #4b4b4b80;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	padding: 10px;
 	opacity: 0;
 	transition: all .2s;
+}
+
+.exif {
+	border-bottom-left-radius: .5rem;
 }
 
 .full-size {
