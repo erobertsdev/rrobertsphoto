@@ -21,7 +21,8 @@ nav {
 	padding: 20px;
 }
 
-.main-logo {
+img.main-logo {
+	opacity: .9;
 	float: left;
 	max-width: 550px;
 }
@@ -95,7 +96,7 @@ select:focus {
 	opacity: 1;
 	transition: opacity 1s ease-in;
 	background-color: #4b4b4b80;
-	transform: translateY(44px);
+	transform: translateY(47px);
 }
 
 .img-container:hover .sub-button {
@@ -106,6 +107,9 @@ select:focus {
 
 .title {
 	display: inline-block;
+	max-width: 300px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	border-bottom-right-radius: 1.5rem;
 	font-size: 2rem;
 	padding: 10px;
