@@ -13,6 +13,7 @@ function renderGallery(page, perPage) {
 					galleryList += `<div class="img-container">
 					<div class="title">${photoTitle}</div>
 					<img id="${photoID}" src="${photoURL}" class="image">
+					<div class="exif-popup" id="exif-popup${photoID}"></div>
 					<div class="sub-button exif" onclick="displayExif()">EXIF</div>
 					<div class="sub-button full-size" onclick="fullSize()">FULLSIZE</div>
 					</div>`;
@@ -35,14 +36,16 @@ function renderGallery(page, perPage) {
 
 // Gathers EXIF data and photoID for EXIF and FULLSIZE buttons when picture is mousedover
 function setImgIDs() {
-	setInterval(() => {
+	setTimeout(() => {
 		imgs = document.querySelectorAll('img');
+
 		for (let img of imgs) {
+			console.log(img);
 			img.onmouseover = function() {
-				// Prevents annoying error if logo is hovered over (doesn't try to collect data on it)
+				// Prevents error if logo is hovered over (doesn't try to collect data on it)
 				if (this.classList[0] !== 'main-logo') {
 					photoID = this.id;
-					// exifPopup = document.getElementById(`exif-popup`);
+					exifPopup = document.getElementById(`exif-popup${photoID}`);
 					getExif();
 				}
 			};
@@ -70,7 +73,7 @@ function getExif() {
 				}
 			});
 		})
-		.catch((err) => alert('Error retrieving data. Please try again in a moment.', err));
+		.catch(() => alert('Error retrieving data. Please try again in a moment.'));
 }
 
 function displayExif() {
@@ -127,7 +130,8 @@ function previous() {
 }
 
 let darkMode = document.querySelector('.switch');
-darkMode.addEventListener('change', () => (body.style.backgroundColor = black));
+let darkModeBody = document.querySelector('body');
+darkMode.addEventListener('change', () => darkModeBody.classList.toggle('dark-body'));
 
 const pageStart = () => {
 	renderGallery(pageNum, perPage);
