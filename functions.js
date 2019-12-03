@@ -15,7 +15,12 @@ function renderGallery(page, perPage) {
 					let photoID = data.photos.photo[i].id;
 					let photoURL = data.photos.photo[i].url_m;
 					photoTitle = data.photos.photo[i].title;
-					galleryList += `<div class="img-container"><div class="title">${photoTitle}</div><img id="${photoID}" src="${photoURL}" class="image"><div class="sub-button exif" onclick="displayExif()">EXIF</div><div class="sub-button full-size" onclick="fullSize()">FULLSIZE</div></div>`;
+					galleryList += `<div class="img-container">
+					<div class="title">${photoTitle}</div>
+					<img id="${photoID}" src="${photoURL}" class="image">
+					<div class="sub-button exif" onclick="displayExif()">EXIF</div>
+					<div class="sub-button full-size" onclick="fullSize()">FULLSIZE</div>
+					</div>`;
 				}
 				if (!listDone) {
 					for (let i = 1; i < data.photos.pages; i++) {
@@ -41,6 +46,7 @@ function setImgIDs() {
 			let img = imgs[i];
 			img.onmouseover = function() {
 				photoID = this.id;
+				exifPopup = document.getElementById(`exif-popup`);
 				getExif();
 			};
 		}
@@ -74,7 +80,7 @@ function getExif() {
 }
 
 function displayExif() {
-	let exifPopup = document.querySelector(`.exif${photoID}`);
+	exifPopup.classList.toggle('popup');
 	exifPopup.innerHTML = `<p>Camera: ${exifCamera}</p>
 						<p>Exposure Time: ${exifExposure}</p>
 						<p>Aperture: ${exifAperture}</p>
@@ -128,4 +134,6 @@ function previous() {
 	});
 }
 
-// https://www.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=fa85dd29b93573b004328880fb639803&photo_id=${photoID}&format=json&nojsoncallback=1
+darkMode.addEventListener('change', function() {
+	body.style.color = black;
+});
