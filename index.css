@@ -182,14 +182,17 @@ select:focus {
 
 .exif-popup {
 	position: absolute;
-	visibility: hidden;
+	transform: translateY(-130px);
+	opacity: 0;
 	background-color: #2f2f2f6e;
 	color: #eef2f3;
-	font-size: 2rem;
+	font-size: 1.5rem;
 }
 
 .popup {
 	visibility: visible;
+	opacity: 1;
+	transition: all 1s;
 	/* height: 80%;
 	width: 80%; */
 }

@@ -38,9 +38,7 @@ function renderGallery(page, perPage) {
 function setImgIDs() {
 	setTimeout(() => {
 		imgs = document.querySelectorAll('img');
-
 		for (let img of imgs) {
-			console.log(img);
 			img.onmouseover = function() {
 				// Prevents error if logo is hovered over (doesn't try to collect data on it)
 				if (this.classList[0] !== 'main-logo') {
