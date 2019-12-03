@@ -3,11 +3,6 @@ function renderGallery(page, perPage) {
 		`https://www.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=4dbd96ac5faaa6d7c4745f718f6e0b9d&user_id=46881493%40N04&extras=url_m&per_page=${perPage}&page=${page}&format=json&nojsoncallback=1`
 	)
 		.then(function(response) {
-			if (response.status !== 200) {
-				console.log('Looks like there was a problem. Status Code: ' + response.status);
-				return;
-			}
-
 			// Render photos to gallery div and assign IDs to use later for full-size and EXIF data
 			response.json().then(function(data) {
 				let galleryList = '';
@@ -34,7 +29,7 @@ function renderGallery(page, perPage) {
 			});
 		})
 		.catch(function(err) {
-			console.log('Error retrieving photos :(', err);
+			alert('Error retrieving photos, please try refreshing the page.', err);
 		});
 }
 
@@ -42,18 +37,19 @@ function renderGallery(page, perPage) {
 function setImgIDs() {
 	setInterval(() => {
 		imgs = document.querySelectorAll('img');
-		for (let i = 0; i < imgs.length; i++) {
-			let img = imgs[i];
+		for (let img of imgs) {
 			img.onmouseover = function() {
-				photoID = this.id;
-				exifPopup = document.getElementById(`exif-popup`);
-				getExif();
+				// Prevents annoying error if logo is hovered over (doesn't try to collect data on it)
+				if (this.classList[0] !== 'main-logo') {
+					photoID = this.id;
+					// exifPopup = document.getElementById(`exif-popup`);
+					getExif();
+				}
 			};
 		}
 	}, 2000);
 }
 
-// Gathers EXIF data when photo is clicked
 function getExif() {
 	fetch(
 		`https://www.flickr.com/services/rest/?method=flickr.photos.getExif&api_key=fa85dd29b93573b004328880fb639803&photo_id=${photoID}&format=json&nojsoncallback=1`
@@ -74,9 +70,7 @@ function getExif() {
 				}
 			});
 		})
-		.catch(function(err) {
-			console.log('Error retrieving data.', err);
-		});
+		.catch((err) => alert('Error retrieving data. Please try again in a moment.', err));
 }
 
 function displayExif() {
@@ -102,9 +96,7 @@ function fullSize() {
 				window.location.href = `${largeImg}`;
 			});
 		})
-		.catch(function(err) {
-			console.log('Error retrieving data.', err);
-		});
+		.catch(() => alert('An error occurred, please try again in a moment.'));
 }
 
 function pageSet() {
@@ -134,6 +126,13 @@ function previous() {
 	});
 }
 
-darkMode.addEventListener('change', function() {
-	body.style.color = black;
-});
+let darkMode = document.querySelector('.switch');
+darkMode.addEventListener('change', () => (body.style.backgroundColor = black));
+
+const pageStart = () => {
+	renderGallery(pageNum, perPage);
+	setImgIDs();
+	pageSet();
+	next();
+	previous();
+};

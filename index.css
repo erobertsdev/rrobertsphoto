@@ -177,7 +177,6 @@ select:focus {
 }
 
 #exif-popup {
-	height: 100vh;
 	background-color: #2f2f2f6e;
 	color: #eef2f3;
 	font-size: 10rem;
