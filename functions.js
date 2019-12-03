@@ -103,14 +103,14 @@ function fullSize() {
 function pageSet() {
 	pageSelect.addEventListener('change', function(e) {
 		pageNum = e.target.value;
-		renderGallery(pageNum, perPage);
+		pageStart();
 	});
 }
 
 function next() {
 	nextButton.addEventListener('click', function() {
 		pageNum++;
-		renderGallery(pageNum, perPage);
+		pageStart();
 		window.scrollTo(0, 0);
 		pageSelect.selectedIndex = pageNum - 1;
 	});
@@ -120,16 +120,16 @@ function previous() {
 	prevButton.addEventListener('click', function() {
 		if (pageNum > 1) {
 			pageNum--;
-			renderGallery(pageNum, perPage);
+			pageStart();
 			window.scrollTo(0, 0);
 			pageSelect.selectedIndex = pageNum - 1;
 		}
 	});
 }
 
-let darkMode = document.querySelector('.switch');
-let darkModeBody = document.querySelector('body');
-darkMode.addEventListener('change', () => darkModeBody.classList.toggle('dark-body'));
+// let darkMode = document.querySelector('.switch');
+// let darkModeBody = document.querySelector('body');
+// darkMode.addEventListener('change', () => darkModeBody.classList.toggle('dark-body'));
 
 const pageStart = () => {
 	renderGallery(pageNum, perPage);
