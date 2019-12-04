@@ -1,9 +1,9 @@
 function renderGallery(page, perPage) {
+	let gallery = document.getElementById('gallery');
 	fetch(
 		`https://www.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=4dbd96ac5faaa6d7c4745f718f6e0b9d&user_id=46881493%40N04&extras=url_m&per_page=${perPage}&page=${page}&format=json&nojsoncallback=1`
 	)
-		.then(function(response) {
-			// Render photos to gallery div and assign IDs to use later for full-size and EXIF data
+		.then((response) => {
 			response.json().then(function(data) {
 				let galleryList = '';
 				for (let i = 0; i < data.photos.perpage; i++) {
@@ -27,9 +27,11 @@ function renderGallery(page, perPage) {
 				gallery.innerHTML = `${galleryList}`;
 				exif = document.querySelectorAll('.exif');
 				imgs = document.querySelectorAll('img');
+				hideNext();
+				hidePrevious();
 			});
 		})
-		.catch(function(err) {
+		.catch((err) => {
 			alert('Error retrieving photos, please try refreshing the page.', err);
 		});
 }
@@ -37,14 +39,23 @@ function renderGallery(page, perPage) {
 // Gathers EXIF data and photoID for EXIF and FULLSIZE buttons when picture is mousedover
 function setImgIDs() {
 	setTimeout(() => {
-		imgs = document.querySelectorAll('img');
 		for (let img of imgs) {
 			img.onmouseover = function() {
 				// Prevents error if logo is hovered over (doesn't try to collect data on it)
 				if (this.classList[0] !== 'main-logo') {
+					for (let img of imgs) {
+						if (img.id !== this.id) {
+							img.classList.add('blur');
+						}
+					}
 					photoID = this.id;
 					exifPopup = document.getElementById(`exif-popup${photoID}`);
 					getExif();
+				}
+			};
+			img.onmouseout = function() {
+				for (let img of imgs) {
+					img.classList.remove('blur');
 				}
 			};
 		}
@@ -56,7 +67,7 @@ function getExif() {
 		`https://www.flickr.com/services/rest/?method=flickr.photos.getExif&api_key=fa85dd29b93573b004328880fb639803&photo_id=${photoID}&format=json&nojsoncallback=1`
 	)
 		.then(function(response) {
-			response.json().then(function(data) {
+			response.json().then((data) => {
 				exifCamera = data.photo.camera;
 				for (let i = 0; i < data.photo.exif.length; i++) {
 					if (data.photo.exif[i].tag === 'ExposureTime') {
@@ -87,8 +98,8 @@ function fullSize() {
 	fetch(
 		`https://www.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=fa85dd29b93573b004328880fb639803&photo_id=${photoID}&format=json&nojsoncallback=1`
 	)
-		.then(function(response) {
-			response.json().then(function(data) {
+		.then((response) => {
+			response.json().then((data) => {
 				for (let i = 0; i < data.sizes.size.length; i++) {
 					if (data.sizes.size[i].label === 'Original') {
 						largeImg = data.sizes.size[i].source;
@@ -101,40 +112,44 @@ function fullSize() {
 }
 
 function pageSet() {
-	pageSelect.addEventListener('change', function(e) {
-		pageNum = e.target.value;
+	pageSelect.addEventListener('change', () => {
+		pageNum = pageSelect.selectedIndex + 1;
 		pageStart();
 	});
+	pageStart();
 }
 
 function next() {
 	nextButton.addEventListener('click', function() {
-		pageNum++;
-		pageStart();
-		window.scrollTo(0, 0);
-		pageSelect.selectedIndex = pageNum - 1;
-	});
-}
-
-function previous() {
-	prevButton.addEventListener('click', function() {
-		if (pageNum > 1) {
-			pageNum--;
+		if (pageNum < pageSelect.length) {
+			pageNum = pageNum + 1;
 			pageStart();
 			window.scrollTo(0, 0);
-			pageSelect.selectedIndex = pageNum - 1;
+			pageSelect.value = pageNum;
 		}
 	});
 }
 
-// let darkMode = document.querySelector('.switch');
-// let darkModeBody = document.querySelector('body');
-// darkMode.addEventListener('change', () => darkModeBody.classList.toggle('dark-body'));
+const hideNext = () =>
+	pageNum === pageSelect.options.length
+		? (nextButton.style.display = 'none')
+		: (nextButton.style.display = 'inherit');
+
+function previous() {
+	prevButton.addEventListener('click', function() {
+		if (pageNum > 1) {
+			pageNum = pageNum - 1;
+			pageStart();
+			window.scrollTo(0, 0);
+			pageSelect.value = pageNum;
+		}
+	});
+}
+
+const hidePrevious = () =>
+	pageNum === 1 ? (prevButton.style.display = 'none') : (prevButton.style.display = 'inherit');
 
 const pageStart = () => {
 	renderGallery(pageNum, perPage);
 	setImgIDs();
-	pageSet();
-	next();
-	previous();
 };
