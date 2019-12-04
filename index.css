@@ -100,7 +100,7 @@ select:focus {
 .img-container:hover .title {
 	opacity: 1;
 	transition: opacity 1s ease-in;
-	background-color: #4b4b4b80;
+	background-color: #4b4b4b36;
 	transform: translateY(39px);
 }
 
@@ -126,7 +126,7 @@ select:focus {
 .sub-button {
 	display: inline-block;
 	text-align: center;
-	background-color: #4b4b4b80;
+	background-color: #4b4b4b36;
 	font-size: 1.2rem;
 	padding: 10px;
 	opacity: 0;
@@ -143,7 +143,7 @@ select:focus {
 
 .sub-button:hover {
 	cursor: pointer;
-	background-color: #4b4b4b;
+	background-color: #4b4b4b7c;
 }
 
 .btn {
@@ -185,10 +185,9 @@ select:focus {
 	position: absolute;
 	border-top-right-radius: 15px;
 	border-bottom-right-radius: 15px;
-	/* top: 30%; */
-	transform: translateY(-150px);
+	transform: translateY(-135px);
 	opacity: 0;
-	background-color: #2f2f2f6e;
+	background-color: #2f2f2f7c;
 	color: #eef2f3;
 	font-size: 1.2rem;
 	transition: all .5s;
