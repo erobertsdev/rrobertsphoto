@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/ea1a8cf193.js" crossorigin="anonymous"></script>
     <title>The Photography of R. Roberts</title>
@@ -11,7 +12,7 @@
 </head>
 <body>
     <nav>
-        <div class="logo"><img src="images/rrobertsphoto-logo.png" class="main-logo image"></div>
+        <div class="logo"><img src="images/rrobertsphoto-logo.png" class="main-logo"></div>
         
         <div class="page">
             <label for="page-select">Page: </label>
@@ -24,17 +25,16 @@
     
     <section id="main">
         <div id="gallery"></div>
+        <div class="btn btn-next">&gt;</div>
+        <div class="btn btn-previous">&lt;</div>
     </section>
 
     <footer>
-        <div class="btn btn-next">&gt;</div>
-        <div class="btn btn-previous">&lt;</div>
         <div class="info-icon"><i class="fas fa-info-circle"></i></div>
         <p class="footer-p">Photographs &copy; 2019 Randall Roberts</p>
         <p class="footer-p">Site Designed by <a href="https://eroberts.dev">Elias Roberts</a></p>
     </footer>
     
-    <script src="functions.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
