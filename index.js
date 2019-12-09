@@ -144,7 +144,7 @@ const fullSize = async (id) => {
 	let sizes = response.data.sizes.size;
 	for (let size of sizes) {
 		if (size.label === 'Original') {
-			window.location.href = size.source;
+			window.open(size.source, '_blank');
 		}
 	}
 };
