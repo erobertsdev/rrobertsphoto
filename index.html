@@ -12,13 +12,22 @@
 </head>
 <body>
     <nav>
-        <div class="logo"><img src="images/rrobertsphoto-logo.png" class="main-logo"></div>
-        
-        <div class="page">
-            <label for="page-select">Page: </label>
+        <div class="nav-left">
+            <div class="logo"><img src="images/rrobertsphoto-logo.png" class="main-logo"></div>
+            
+            <div class="page">
+                <label for="page-select">Page: </label>
 
-            <select name="page" id="page-select">
-            </select>
+                <select name="page" id="page-select">
+                </select>
+            </div>
+        </div>
+
+        <div class="nav-search">
+            <form>
+                <input type="text" placeholder="Search Pictures" id="search" />
+                <button type="submit" class="search-btn">Search</button>
+            </form>
         </div>
         
     </nav>
@@ -30,7 +39,6 @@
     </section>
 
     <footer>
-        <div class="info-icon"><i class="fas fa-info-circle"></i></div>
         <p class="footer-p">Photographs &copy; 2019 Randall Roberts</p>
         <p class="footer-p">Site Designed by <a href="https://eroberts.dev">Elias Roberts</a></p>
     </footer>

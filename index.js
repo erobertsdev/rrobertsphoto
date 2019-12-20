@@ -1,22 +1,34 @@
 let pageNum = 1;
 let listDone = false;
 let imgs;
+let searchText = '';
 const gallery = document.getElementById('gallery');
 const pageSelect = document.getElementById('page-select');
 const nextButton = document.querySelector('.btn-next');
 const prevButton = document.querySelector('.btn-previous');
+const searchBtn = document.querySelector('button');
 
 pageSelect.addEventListener('change', (e) => {
 	pageNum = e.target.value;
 	renderGallery(pageNum);
 });
 
-const fetchData = async (perPage, pageNum) => {
+searchBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+	pageSelect.options.length = 0;
+	listDone = false;
+	pageNum = 1;
+	searchText = document.querySelector('#search').value;
+	renderGallery(pageNum);
+});
+
+const fetchData = async (perPage, pageNum, searchText) => {
 	const response = await axios.get('https://www.flickr.com/services/rest/', {
 		params: {
-			method: 'flickr.people.getPublicPhotos',
+			method: 'flickr.photos.search',
 			api_key: '4dbd96ac5faaa6d7c4745f718f6e0b9d',
 			user_id: '46881493@N04',
+			text: searchText,
 			extras: 'url_m',
 			per_page: perPage,
 			page: pageNum,
@@ -28,10 +40,20 @@ const fetchData = async (perPage, pageNum) => {
 };
 
 const renderGallery = async (pageNum) => {
+	document.querySelector('.page').classList.remove('hidden');
 	gallery.innerHTML = '';
-	const imgData = await fetchData(24, pageNum);
+	const imgData = await fetchData(24, pageNum, searchText);
+
+	if (imgData.photos.pages === 0) {
+		gallery.innerHTML = '<p class="no-results">NO RESULTS FOUND</p>';
+		return;
+	}
+
 	const imgList = imgData.photos.photo;
 	const pages = imgData.photos.pages;
+	if (pages === 1) {
+		document.querySelector('.page').classList.add('hidden');
+	}
 
 	for (let img of imgList) {
 		const imgContainer = document.createElement('div');
@@ -60,7 +82,7 @@ const renderGallery = async (pageNum) => {
 
 renderGallery(pageNum);
 
-nextButton.addEventListener('click', function() {
+nextButton.addEventListener('click', () => {
 	if (pageNum < pageSelect.length) {
 		pageNum++;
 		renderGallery(pageNum);
@@ -70,11 +92,11 @@ nextButton.addEventListener('click', function() {
 });
 
 const hideNext = () =>
-	pageNum === String(pageSelect.options.length)
+	pageNum === pageSelect.options.length || pageSelect.options.length === 0
 		? (nextButton.style.display = 'none')
 		: (nextButton.style.display = 'inherit');
 
-prevButton.addEventListener('click', function() {
+prevButton.addEventListener('click', () => {
 	if (pageNum > 1) {
 		pageNum--;
 		renderGallery(pageNum);
@@ -102,6 +124,7 @@ const fetchExif = async (id) => {
 const setExif = () => {
 	for (let img of imgs) {
 		img.addEventListener('mouseover', async () => {
+			img.style.opacity = '1';
 			const exifData = await fetchExif(img.id);
 			exifPopup = document.getElementById(`exif-popup${img.id}`);
 			let camera = exifData.camera;
