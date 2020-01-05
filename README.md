@@ -1,4 +1,4 @@
 # rrobertsphoto
 
-A photo gallery project I used to understand asynchronous Javascript and Axios.
+A photo gallery project I used to understand asynchronous Javascript and API requests.
 Utilizes the Flickr API.
