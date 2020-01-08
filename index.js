@@ -45,6 +45,9 @@ const renderGallery = async (pageNum) => {
 	const imgData = await fetchData(24, pageNum, searchText);
 
 	if (imgData.photos.pages === 0) {
+		document.querySelector('.page').classList.add('hidden');
+		hideNext();
+		hidePrevious();
 		gallery.innerHTML = '<p class="no-results">NO RESULTS FOUND</p>';
 		return;
 	}
@@ -68,7 +71,7 @@ const renderGallery = async (pageNum) => {
 		gallery.appendChild(imgContainer);
 	}
 	if (!listDone) {
-		for (let i = 1; i < pages; i++) {
+		for (let i = 1; i <= pages; i++) {
 			pageSelect.options[pageSelect.options.length] = new Option(i, i);
 		}
 		listDone = true;
@@ -92,7 +95,7 @@ nextButton.addEventListener('click', () => {
 });
 
 const hideNext = () =>
-	pageNum === pageSelect.options.length || pageSelect.options.length === 0
+	pageNum == pageSelect.options.length || pageSelect.options.length === 0
 		? (nextButton.style.display = 'none')
 		: (nextButton.style.display = 'inherit');
 
@@ -106,7 +109,7 @@ prevButton.addEventListener('click', () => {
 });
 
 const hidePrevious = () =>
-	pageNum === 1 ? (prevButton.style.display = 'none') : (prevButton.style.display = 'inherit');
+	pageNum == 1 || pageNum == 0 ? (prevButton.style.display = 'none') : (prevButton.style.display = 'inherit');
 
 const fetchExif = async (id) => {
 	const response = await axios.get('https://www.flickr.com/services/rest/', {
