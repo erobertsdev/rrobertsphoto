@@ -5,7 +5,7 @@ const controller = (() => {
 			const response = await axios.get('https://www.flickr.com/services/rest/', {
 				params: {
 					method: 'flickr.photos.search',
-					api_key: '4dbd96ac5faaa6d7c4745f718f6e0b9d',
+					api_key: 'process.env.API_KEY',
 					user_id: '46881493@N04',
 					text: searchText,
 					extras: 'url_m',
@@ -67,7 +67,7 @@ const controller = (() => {
 			const response = await axios.get('https://www.flickr.com/services/rest/', {
 				params: {
 					method: 'flickr.photos.getSizes',
-					api_key: '4dbd96ac5faaa6d7c4745f718f6e0b9d',
+					api_key: 'process.env.API_KEY',
 					photo_id: id,
 					format: 'json',
 					nojsoncallback: 1
@@ -116,7 +116,7 @@ const controller = (() => {
 			const response = await axios.get('https://www.flickr.com/services/rest/', {
 				params: {
 					method: 'flickr.photos.getExif',
-					api_key: '4dbd96ac5faaa6d7c4745f718f6e0b9d',
+					api_key: 'process.env.API_KEY',
 					photo_id: id,
 					format: 'json',
 					nojsoncallback: 1
